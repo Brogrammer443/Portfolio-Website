@@ -1,0 +1,26 @@
+name: wf
+on:
+  pull_request:
+    branches:
+      - develop
+  push:
+    branches:
+      - develop
+jobs:
+  linting-jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: WELCOME STEP
+        run: echo "Something"
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - name: install HTMLhint
+        run: npm install --save-dev htmlhint
+      - name: install stylelint
+        run: npm install --save-dev stylelint
+      - name: lint HTML files
+        run: npx htmlhint "**/*.html"
+      - name: lint stylelint files
+        run: npx stylelint "**/*.css"
+      - name: Display package.json contents
+        run: cat package.json
